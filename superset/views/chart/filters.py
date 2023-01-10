@@ -18,10 +18,11 @@ from typing import Any
 
 from sqlalchemy import or_
 from sqlalchemy.orm.query import Query
-from superset.views.base import BaseFilter
+
+from superset import db, security_manager
 from superset.connectors.sqla import models
 from superset.utils.core import get_user_id
-from superset import security_manager, db
+from superset.views.base import BaseFilter
 
 
 class SliceFilter(BaseFilter):  # pylint: disable=too-few-public-methods
