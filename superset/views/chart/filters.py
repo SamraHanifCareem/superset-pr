@@ -42,6 +42,6 @@ class SliceFilter(BaseFilter):  # pylint: disable=too-few-public-methods
             or_(
                 self.model.perm.in_(perms),
                 self.model.schema_perm.in_(schema_perms),
-                # models.SqlaTable.id.in_(owner_ids_query),
+                models.SqlaTable.id.in_(owner_ids_query),
             )
         )
