@@ -21,14 +21,27 @@ from sqlalchemy.orm.query import Query
 
 from superset import security_manager
 from superset.views.base import BaseFilter
+from superset.connectors.sqla import models
+from superset.utils.core import get_user_id
+from superset import security_manager, db
 
 
 class SliceFilter(BaseFilter):  # pylint: disable=too-few-public-methods
     def apply(self, query: Query, value: Any) -> Query:
         if security_manager.can_access_all_datasources():
             return query
+
+        owner_ids_query = (
+            db.session.query(models.SqlaTable.id)
+            .join(models.SqlaTable.owners)
+            .filter(security_manager.user_model.id == get_user_id())
+        )
         perms = security_manager.user_view_menu_names("datasource_access")
         schema_perms = security_manager.user_view_menu_names("schema_access")
         return query.filter(
-            or_(self.model.perm.in_(perms), self.model.schema_perm.in_(schema_perms))
+            or_(
+                self.model.perm.in_(perms),
+                self.model.schema_perm.in_(schema_perms),
+                # models.SqlaTable.id.in_(owner_ids_query),
+            )
         )
