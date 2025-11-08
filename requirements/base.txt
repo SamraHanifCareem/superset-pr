@@ -36,7 +36,7 @@ blinker==1.9.0
     # via flask
 bottleneck==1.4.2
     # via pandas
-brotli==1.1.0
+brotli==1.2.0
     # via flask-compress
 cachelib==0.9.0
     # via
