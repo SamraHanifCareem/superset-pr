@@ -32,7 +32,7 @@ distlib==0.3.8
     # via virtualenv
 docker==7.0.0
     # via apache-superset
-filelock==3.12.2
+filelock==3.20.3
     # via virtualenv
 flask-cors==4.0.0
     # via apache-superset
@@ -218,3 +218,6 @@ zope-interface==5.4.0
 # The following packages are considered to be unsafe in a requirements file:
 # pip
 # setuptools
+pyasn1>=0.6.2 # not directly required, pinned by Snyk to avoid a vulnerability
+urllib3>=2.6.3 # not directly required, pinned by Snyk to avoid a vulnerability
+werkzeug>=3.1.5 # not directly required, pinned by Snyk to avoid a vulnerability
